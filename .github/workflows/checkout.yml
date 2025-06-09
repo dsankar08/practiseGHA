@@ -1,0 +1,12 @@
+name: Implementing the GHA action
+
+on: push
+
+jobs:
+    first_job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checking out repo
+              uses: actions/checkout@v4
+
+
