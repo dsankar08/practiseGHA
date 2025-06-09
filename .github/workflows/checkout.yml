@@ -9,4 +9,7 @@ jobs:
             - name: checking out repo
               uses: actions/checkout@v4
 
+            - name: Listing the files
+              run: ls -a
+
 
