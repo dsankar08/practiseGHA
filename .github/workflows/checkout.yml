@@ -12,4 +12,14 @@ jobs:
             - name: Listing the files
               run: ls -a
 
+    second_job:
+        runs-on: ubuntu-latest
+        steps:
+          - name: creating a text file and checking its content
+            run: |
+              touch dragon.txt
+              echo "Hi, i am joyboy" >> dragon.txt
+              cat dragon.txt
+
+
 
