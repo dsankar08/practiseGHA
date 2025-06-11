@@ -1,0 +1,41 @@
+name : Implementing artifacts
+
+on: push
+
+jobs:
+    first_job:
+        runs-on: ubuntu-latest
+        name: pushing the file in artifact
+        steps:
+            - name: checking out 
+              uses: actions/checkout@v4
+
+            - name: creating the file
+              run: |
+                touch newfile.txt
+                echo "I am the best devops/sre engineer in the world with the lowest number of skills" >> newfile.txt
+                cat newfile.txt
+                cat newfile.txt | grep best
+
+            - name: uploading the artifact
+              uses: actions/upload-artifact@v4
+              with:
+                name: my-new file
+                path: newfile.txt
+            
+    second_job:
+        runs-on: ubuntu-latest
+        name: downloading the artifact and checking
+        steps:
+            - name: download the artifact
+              uses: actions/download-artifact@v4
+              with:
+                name: my-newfile
+                
+            
+            - name: checking the file
+              run: |
+                ls -la
+                cat newfile.txt
+
+                
