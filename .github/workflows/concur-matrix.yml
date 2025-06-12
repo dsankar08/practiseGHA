@@ -1,0 +1,28 @@
+name : Implementing matrix and concurrency in this workflow
+
+on: push
+
+jobs:
+    first_job:
+        concurrency: 
+            group: Production deploy
+            cancel-in-progress: true
+        strategy:
+            fail-fast: false
+            max-parallel: 2 
+            matrix:
+                os: [ubuntu-latest,windows-latest]
+                image: [hello-world,nginx]
+        name: adding matrix
+        runs-on: ${{ matrix.os }}
+        steps:
+            - name: check docker info
+              run: |
+                docker --version > newfile.txt
+                cat newfile.txt
+
+            - name: run docker image on ${{ matrix.os }}
+              run: |
+                docker run ${{ matrix.image }}
+                docker images 
+
